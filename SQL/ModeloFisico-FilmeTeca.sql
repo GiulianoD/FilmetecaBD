@@ -4,7 +4,7 @@ CREATE TABLE Film (
     id bigserial PRIMARY KEY
 );
 
-CREATE TABLE User (
+CREATE TABLE Customer (
     user_creation_date date,
     email varchar(512),
     birthday date,
@@ -14,30 +14,30 @@ CREATE TABLE User (
 );
 
 CREATE TABLE Favorite (
-    fk_User_id serial,
+    fk_Customer_id serial,
     fk_Film_id bigserial,
     id serial PRIMARY KEY,
     date_of date
 );
 
 CREATE TABLE Watched (
-    fk_User_id serial,
+    fk_Customer_id serial,
     fk_Film_id bigserial,
     id serial PRIMARY KEY,
     watch_date date
 );
 
-CREATE TABLE Comment (
+CREATE TABLE Annotation (
     fk_Film_id bigserial,
-    fk_User_id serial,
+    fk_Customer_id serial,
     text varchar(512),
     id bigserial PRIMARY KEY,
     time_of datetime
 );
  
 ALTER TABLE Favorite ADD CONSTRAINT FK_Favorite_2
-    FOREIGN KEY (fk_User_id)
-    REFERENCES User (id)
+    FOREIGN KEY (fk_Customer_id)
+    REFERENCES Customer (id)
     ON DELETE SET NULL;
  
 ALTER TABLE Favorite ADD CONSTRAINT FK_Favorite_3
@@ -46,8 +46,8 @@ ALTER TABLE Favorite ADD CONSTRAINT FK_Favorite_3
     ON DELETE SET NULL;
  
 ALTER TABLE Watched ADD CONSTRAINT FK_Watched_2
-    FOREIGN KEY (fk_User_id)
-    REFERENCES User (id)
+    FOREIGN KEY (fk_Customer_id)
+    REFERENCES Customer (id)
     ON DELETE SET NULL;
  
 ALTER TABLE Watched ADD CONSTRAINT FK_Watched_3
@@ -55,12 +55,12 @@ ALTER TABLE Watched ADD CONSTRAINT FK_Watched_3
     REFERENCES Film (id)
     ON DELETE SET NULL;
  
-ALTER TABLE Comment ADD CONSTRAINT FK_Comment_2
+ALTER TABLE Annotation ADD CONSTRAINT FK_Annotation_2
     FOREIGN KEY (fk_Film_id)
     REFERENCES Film (id)
     ON DELETE SET NULL;
  
-ALTER TABLE Comment ADD CONSTRAINT FK_Comment_3
-    FOREIGN KEY (fk_User_id)
-    REFERENCES User (id)
+ALTER TABLE Annotation ADD CONSTRAINT FK_Annotation_3
+    FOREIGN KEY (fk_Customer_id)
+    REFERENCES Customer (id)
     ON DELETE SET NULL;
