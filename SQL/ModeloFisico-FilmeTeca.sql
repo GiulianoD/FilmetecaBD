@@ -32,7 +32,7 @@ CREATE TABLE Annotation (
     fk_Customer_id serial,
     text varchar(512),
     id bigserial PRIMARY KEY,
-    time_of datetime
+    time_of time
 );
  
 ALTER TABLE Favorite ADD CONSTRAINT FK_Favorite_2
