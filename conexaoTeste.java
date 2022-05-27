@@ -3,32 +3,20 @@ package teste;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class Teste {
-	private static final String URI_BD = "postgres://uaoqajtypqbpui:2bd8e016b21b8fdb6b2e716a55af85ebac9e421c038c52835bf64a8720150cdb@ec2-54-165-90-230.compute-1.amazonaws.com:5432/d4picedhjsu894";
-	
-	private static Connection conectar(String uri) throws URISyntaxException, SQLException{
-		
-		URI dbURI= new URI (System.getenv(uri));
-		
-		String usuario = dbURI.getUserInfo().split(":")[0];
-		String senha = dbURI.getUserInfo().split(":")[1];
-		String dbURL = "jdbc:postgresql://" + dbURI.getHost() + ':' + dbURI.getPort() + dbURI.getPath() + "?sslmode=require";
-		
-		return DriverManager.getConnection(dbURL, usuario, senha);
-	}
+	// URL_BD == "jdbc:MaintenaceDatabase://host:port/DatabaseRestriction"
+	private static final String URL_BD = "jdbc:" + "postgresql://" + "ec2-54-86-224-85.compute-1.amazonaws.com" + ":" +"5432" + "/" + "d8jnfv529iios4";
+	private static final String USER = "obfotxtfenewnb";
+	private static final String PASSWORD = "d423f724b4c3d1d15bbc5d59bce5e59fc10338dc3f6678b7afeff3c3fb524b45";
 	
 	public static void main (String[] args){
 	
 		try {
-			Connection conexao = conectar(URI_BD);
+			Connection conexao = DriverManager.getConnection(URL_BD, USER, PASSWORD);
 			System.out.println("DBserver succesfully connected.");
 			
 			conexao.close();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
