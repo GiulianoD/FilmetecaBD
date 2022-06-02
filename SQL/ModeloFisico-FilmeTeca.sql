@@ -1,4 +1,4 @@
-/* ModeloLogico-FilmeTeca v0.1: */
+/* ModeloLogico-FilmeTeca v1: */
 
 CREATE TABLE Filme (
     id bigserial PRIMARY KEY,
@@ -51,7 +51,8 @@ CREATE TABLE Avaliacao (
 
 CREATE TABLE GeneroFilme (
     fk_Filme_id bigserial,
-    fk_Genero_id serial
+    fk_Genero_id serial,
+    PRIMARY KEY (fk_Genero_id, fk_Filme_id)
 );
  
 ALTER TABLE Favorito ADD CONSTRAINT FK_Favorito_1
