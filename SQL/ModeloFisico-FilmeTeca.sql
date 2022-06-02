@@ -1,66 +1,105 @@
 /* ModeloLogico-FilmeTeca v0.1: */
 
-CREATE TABLE Film (
-    id bigserial PRIMARY KEY
+CREATE TABLE Filme (
+    id bigserial PRIMARY KEY,
+    nome varchar(512),
+    dataLancamento date
 );
 
-CREATE TABLE Customer (
-    user_creation_date date,
+CREATE TABLE Usuario (
+    data_inscricao date,
     email varchar(512),
-    birthday date,
-    password varchar(50),
-    username varchar(30),
+    senha varchar(50),
+    nome varchar(30),
     id serial PRIMARY KEY
 );
 
-CREATE TABLE Favorite (
-    fk_Customer_id serial,
-    fk_Film_id bigserial,
+CREATE TABLE Genero (
     id serial PRIMARY KEY,
-    date_of date
+    nome varchar(30)
 );
 
-CREATE TABLE Watched (
-    fk_Customer_id serial,
-    fk_Film_id bigserial,
-    id serial PRIMARY KEY,
-    watch_date date
+CREATE TABLE Favorito (
+    fk_Usuario_id serial,
+    fk_Filme_id bigserial,
+    data date,
+    PRIMARY KEY (fk_Usuario_id, fk_Filme_id)
 );
 
-CREATE TABLE Annotation (
-    fk_Film_id bigserial,
-    fk_Customer_id serial,
-    text varchar(512),
-    id bigserial PRIMARY KEY,
-    time_of time
+CREATE TABLE Interesse (
+    fk_Usuario_id serial,
+    fk_Filme_id bigserial,
+    data date,
+    PRIMARY KEY (fk_Usuario_id, fk_Filme_id)
+);
+
+CREATE TABLE Comentario (
+    fk_Filme_id bigserial,
+    fk_Usuario_id serial,
+    texto varchar(512),
+    data time,
+    PRIMARY KEY (fk_Filme_id, fk_Usuario_id)
+);
+
+CREATE TABLE Avaliacao (
+    fk_Filme_id bigserial,
+    fk_Usuario_id serial,
+    valor bigint,
+    data date,
+    PRIMARY KEY (fk_Filme_id, fk_Usuario_id)
+);
+
+CREATE TABLE GeneroFilme (
+    fk_Filme_id bigserial,
+    fk_Genero_id serial
 );
  
-ALTER TABLE Favorite ADD CONSTRAINT FK_Favorite_2
-    FOREIGN KEY (fk_Customer_id)
-    REFERENCES Customer (id)
+ALTER TABLE Favorito ADD CONSTRAINT FK_Favorito_1
+    FOREIGN KEY (fk_Usuario_id)
+    REFERENCES Usuario (id)
     ON DELETE SET NULL;
  
-ALTER TABLE Favorite ADD CONSTRAINT FK_Favorite_3
-    FOREIGN KEY (fk_Film_id)
-    REFERENCES Film (id)
+ALTER TABLE Favorito ADD CONSTRAINT FK_Favorito_2
+    FOREIGN KEY (fk_Filme_id)
+    REFERENCES Filme (id)
     ON DELETE SET NULL;
  
-ALTER TABLE Watched ADD CONSTRAINT FK_Watched_2
-    FOREIGN KEY (fk_Customer_id)
-    REFERENCES Customer (id)
+ALTER TABLE Interesse ADD CONSTRAINT FK_Interesse_1
+    FOREIGN KEY (fk_Usuario_id)
+    REFERENCES Usuario (id)
     ON DELETE SET NULL;
  
-ALTER TABLE Watched ADD CONSTRAINT FK_Watched_3
-    FOREIGN KEY (fk_Film_id)
-    REFERENCES Film (id)
+ALTER TABLE Interesse ADD CONSTRAINT FK_Interesse_2
+    FOREIGN KEY (fk_Filme_id)
+    REFERENCES Filme (id)
     ON DELETE SET NULL;
  
-ALTER TABLE Annotation ADD CONSTRAINT FK_Annotation_2
-    FOREIGN KEY (fk_Film_id)
-    REFERENCES Film (id)
+ALTER TABLE Comentario ADD CONSTRAINT FK_Comentario_1
+    FOREIGN KEY (fk_Filme_id)
+    REFERENCES Filme (id)
     ON DELETE SET NULL;
  
-ALTER TABLE Annotation ADD CONSTRAINT FK_Annotation_3
-    FOREIGN KEY (fk_Customer_id)
-    REFERENCES Customer (id)
+ALTER TABLE Comentario ADD CONSTRAINT FK_Comentario_2
+    FOREIGN KEY (fk_Usuario_id)
+    REFERENCES Usuario (id)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_1
+    FOREIGN KEY (fk_Filme_id)
+    REFERENCES Filme (id)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
+    FOREIGN KEY (fk_Usuario_id)
+    REFERENCES Usuario (id)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE GeneroFilme ADD CONSTRAINT FK_GeneroFilme_1
+    FOREIGN KEY (fk_Filme_id)
+    REFERENCES Filme (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE GeneroFilme ADD CONSTRAINT FK_GeneroFilme_2
+    FOREIGN KEY (fk_Genero_id)
+    REFERENCES Genero (id)
     ON DELETE SET NULL;
