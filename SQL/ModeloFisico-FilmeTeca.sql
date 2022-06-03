@@ -3,11 +3,11 @@
 CREATE TABLE Filme (
     id bigserial PRIMARY KEY,
     nome varchar(512),
-    dataLancamento date
+    dataLancamento datetime
 );
 
 CREATE TABLE Usuario (
-    data_inscricao date,
+    data_inscricao datetime,
     email varchar(512),
     senha varchar(50),
     nome varchar(30),
@@ -22,14 +22,14 @@ CREATE TABLE Genero (
 CREATE TABLE Favorito (
     fk_Usuario_id serial,
     fk_Filme_id bigserial,
-    data date,
+    data datetime,
     PRIMARY KEY (fk_Usuario_id, fk_Filme_id)
 );
 
 CREATE TABLE Interesse (
     fk_Usuario_id serial,
     fk_Filme_id bigserial,
-    data date,
+    data datetime,
     PRIMARY KEY (fk_Usuario_id, fk_Filme_id)
 );
 
@@ -37,15 +37,15 @@ CREATE TABLE Comentario (
     fk_Filme_id bigserial,
     fk_Usuario_id serial,
     texto varchar(512),
-    data time,
-    PRIMARY KEY (fk_Filme_id, fk_Usuario_id)
+    data datetime,
+    id bigserial PRIMARY KEY
 );
 
 CREATE TABLE Avaliacao (
     fk_Filme_id bigserial,
     fk_Usuario_id serial,
     valor bigint,
-    data date,
+    data datetime,
     PRIMARY KEY (fk_Filme_id, fk_Usuario_id)
 );
 
