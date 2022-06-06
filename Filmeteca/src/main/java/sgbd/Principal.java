@@ -2,10 +2,10 @@ package sgbd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 
 public class Principal {
@@ -105,13 +105,12 @@ public class Principal {
 	}
 
 	public static boolean cadastrar_usuario(Connection bd, String nome, String senha, String email) {
-		if (busca_nome(bd,nome)) {
+		boolean resposta = false;
+		
+		if (busca_nome(bd,nome))
 			System.out.println("Usuario ja cadastrado.");
-			return false;
-		} if (busca_email(bd,email)) {
+		if (busca_email(bd,email))
 			System.out.println("E-Mail ja cadastrado.");
-			return false;
-		}
 		
 		java.util.Date data = new java.util.Date(System.currentTimeMillis());
 		java.sql.Date sqlDate1 = new java.sql.Date(data.getTime());		
@@ -127,18 +126,18 @@ public class Principal {
 	        stmt.setTimestamp(4, ts);
 	        stmt.execute();
 	        stmt.close();
+			resposta = true;
 		} catch (SQLException e) {
 			System.out.println("Erro ao criar usuario.");
 			e.printStackTrace();
-			return false;
 		}
-		return true;
+		return resposta;
 	}
 	
 	public static void main (String[] args){
 		final Connection bd = bd_conectar(BD_URL, BD_USUARIO, BD_SENHA);
 		
-		String nome = "Giuliano";
+		//String nome = "Giuliano2";
 		String senha = "Senha.123";
 		String email = "email@yahoo.com.br";
 		
