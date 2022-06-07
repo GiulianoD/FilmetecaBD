@@ -35,6 +35,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sgbd.Filmeteca.secure.SampleSecureApplicationTests.TestConfiguration;
+import com.sgbd.filmeteca.secure.SampleSecureApplication;
+import com.sgbd.filmeteca.secure.SampleService;
 
 import static org.junit.Assert.assertEquals;
 

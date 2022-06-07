@@ -7,7 +7,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.0.2.RELEASE</version>
 	</parent>
-	<artifactId>Filmeteca</artifactId>
+	<artifactId>filmeteca</artifactId>
 	<groupId>com.sgbd</groupId>
 	<name>Spring Boot Security Sample</name>
 	<description>Spring Boot Security Sample</description>
