@@ -1,4 +1,4 @@
-/* ModeloLogico-FilmeTeca v1: */
+/* Logico: */
 
 CREATE TABLE Filme (
     id bigserial PRIMARY KEY,
@@ -54,6 +54,19 @@ CREATE TABLE GeneroFilme (
     fk_Genero_id serial,
     PRIMARY KEY (fk_Genero_id, fk_Filme_id)
 );
+
+CREATE TABLE Participante (
+    id serial PRIMARY KEY,
+    nome varchar(200),
+    funcao varchar(200),
+    papel varchar(200)
+);
+
+CREATE TABLE Participacao (
+    fk_Filme_id bigserial,
+    fk_Participante_is serial,
+    PRIMARY KEY (fk_Filme_id, fk_Participante_is)
+);
  
 ALTER TABLE Favorito ADD CONSTRAINT FK_Favorito_1
     FOREIGN KEY (fk_Usuario_id)
@@ -104,3 +117,11 @@ ALTER TABLE GeneroFilme ADD CONSTRAINT FK_GeneroFilme_2
     FOREIGN KEY (fk_Genero_id)
     REFERENCES Genero (id)
     ON DELETE SET NULL;
+ 
+ALTER TABLE Participacao ADD CONSTRAINT FK_Participacao_2
+    FOREIGN KEY (fk_Filme_id)
+    REFERENCES Filme (id);
+ 
+ALTER TABLE Participacao ADD CONSTRAINT FK_Participacao_3
+    FOREIGN KEY (fk_Participante_is)
+    REFERENCES Participante (id);
